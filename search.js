@@ -1,9 +1,10 @@
+//require is Node.js global function that allows you to extract contents from module.exports object inside some file.
 const path = require('path');
 const fs = require('fs');
 const dirPath = path.resolve("")// Get current fullpath
 
-var exp = process.argv[2];// Get first parameter
-var ext = process.argv[3];// Get second parameter
+var ext = process.argv[2];// Get first parameter
+var exp = process.argv[3];// Get second parameter
 
 function findFilesNest(dir, ext, exp) {
 
@@ -15,7 +16,6 @@ function findFilesNest(dir, ext, exp) {
 	ext = "." + ext;
     const extFiles = getExtFiles(dir, ext);// Get only files with suffix ext(parameter) 
 	const expFiles = getExpFiles(dir,exp,extFiles)
-	
 	if(expFiles.length == 0){
 		console.log("No file was found!");}
 	else{
@@ -50,7 +50,7 @@ function getExpFiles(dir,exp,extFilesList){ // Get all files that contain a desi
 	extFilesList.forEach(file => {
     const fileContent = fs.readFileSync(file);// Get the file content
 
-    const regex = new RegExp('\\b' + exp + '\\b' );//Find a match of a word
+    const regex = new RegExp(exp);//Find a match of a word
     if (regex.test(fileContent)) {
 		const filePath = path.join("", file);
 		expFiles.push(filePath);
