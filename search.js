@@ -14,7 +14,7 @@ function findFilesNest(dir, ext, exp) {
 	}
 	ext = "." + ext;
     const extFiles = getExtFiles(dir, ext);// Get only files with suffix ext(parameter) 
-	const expFiles = getExpFiles(dir,extFiles)
+	const expFiles = getExpFiles(dir,exp,extFiles)
 	
 	if(expFiles.length == 0){
 		console.log("No file was found!");}
@@ -24,7 +24,7 @@ function findFilesNest(dir, ext, exp) {
 		}	
 }
 
-function getExtFiles(dir, ext) {
+function getExtFiles(dir, ext) {// Get all files with extension ext(parameter) 
     let files = [];//local list
     fs.readdirSync(dir).forEach(file => {
         const filePath = path.join(dir, file);// Will be dir/file
@@ -45,7 +45,7 @@ function getExtFiles(dir, ext) {
     return files;
 }
 
-function getExpFiles(dir,extFilesList){
+function getExpFiles(dir,exp,extFilesList){ // Get all files that contain a desired word exp(parameter) 
 	let expFiles = []
 	extFilesList.forEach(file => {
     const fileContent = fs.readFileSync(file);// Get the file content
